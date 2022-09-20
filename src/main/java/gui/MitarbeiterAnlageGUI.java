@@ -25,7 +25,7 @@ public class MitarbeiterAnlageGUI {
 	private MitarbeiterVerwaltung mv;
 
 	private JFrame f = new JFrame("Mitarbeiter Einstellen");
-	private String[] attributsNamen = { "Name", "Gehalt", "Stundenlohn", "Führerscheinklasse", "Bonusssatz" };
+	private String[] attributsNamen = { "Name", "Gehalt", "Stundenlohn", "Fuehrerscheinklasse", "Bonusssatz" };
 	private ArrayList<JTextField> entries = new ArrayList<>();
 	private ArrayList<JLabel> labels = new ArrayList<>();
 	private JComboBox<MitarbeiterTyp> typAuswahl = new JComboBox<>(MitarbeiterTyp.values());

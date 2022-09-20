@@ -17,7 +17,7 @@ public class Fahrer extends SchichtArbeiter {
 			}
 		}
 		if(!gueltig)
-			throw new IllegalArgumentException( fuehrerSchein + "-Klasse nicht gültig.");
+			throw new IllegalArgumentException( fuehrerSchein + "-Klasse nicht gueltig.");
 	}
 
 	public Fahrer(int id, String name, double satz, String fuehrerSchein) throws IllegalArgumentException {
@@ -25,7 +25,7 @@ public class Fahrer extends SchichtArbeiter {
 		this.setFuehrerSchein(fuehrerSchein);
 	}
 	public String toString() {
-		return super.toString() + " hat Führerscheinklasse " + this.fuehrerSchein;
+		return super.toString() + " hat Fuehrerscheinklasse " + this.fuehrerSchein;
 	}
 //	public void writeIntoCSV(Path file) {
 //		super.writeIntoCSV(file);

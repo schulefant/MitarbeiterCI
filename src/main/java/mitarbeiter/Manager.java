@@ -40,7 +40,7 @@ public class Manager extends BueroArbeiter {
 	}
 
 	public String toString() {
-		return super.toString() + " zuzüglich  Bonus " + Math.round(berechneBonus()*100)/100.0 + ". Gesamteinkommen: "+ Math.round(einkommen()*100)/100.0  ;
+		return super.toString() + " zuzueglich  Bonus " + Math.round(berechneBonus()*100)/100.0 + ". Gesamteinkommen: "+ Math.round(einkommen()*100)/100.0  ;
 	}
 //	public void writeIntoCSV(Path file) {
 //		super.writeIntoCSV(file);
