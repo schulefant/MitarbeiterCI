@@ -32,7 +32,7 @@ public abstract class Mitarbeiter {
 		return this.id;
 	}
 
-	public void setName(String name) {
+	public void setName(String name)throws IllegalArgumentException {
 		String erlaubt = "";
 		boolean anfangName = true;
 
