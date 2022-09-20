@@ -80,5 +80,5 @@ public abstract class Mitarbeiter {
 		result += this.name + ";";
 		return result;
 	}
-
+	public void arbeite(int std) {}
 }

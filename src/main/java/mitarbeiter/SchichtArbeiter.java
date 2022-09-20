@@ -40,6 +40,7 @@ public class SchichtArbeiter extends Mitarbeiter {
 			this.anzahlStunden = anzahlStunden;
 	}
 
+	@Override
 	public void arbeite(int std) {
 		if (std > 0)
 			this.setAnzahlStunden(this.anzahlStunden + std);
@@ -57,6 +58,7 @@ public class SchichtArbeiter extends Mitarbeiter {
 		return super.toString()
 				+ (" Einkommen: " + einkommen() + " bei " + this.anzahlStunden + " gearbeiteten Stunden.");
 	}
+
 //	public void writeIntoCSV(Path file) {
 //		super.writeIntoCSV(file);
 //		try (BufferedWriter bw = Files.newBufferedWriter(file, StandardOpenOption.APPEND )) {
@@ -69,11 +71,12 @@ public class SchichtArbeiter extends Mitarbeiter {
 //	}
 	@Override
 	public String toCSVString() {
-		String result =	super.toCSVString();
-		result += this.stundenSatz +";";
-		result += this.anzahlStunden +";";
+		String result = super.toCSVString();
+		result += this.stundenSatz + ";";
+		result += this.anzahlStunden + ";";
 		return result;
 	}
+
 	@Override
 	protected MitarbeiterTyp getType() {
 		return MitarbeiterTyp.SCHICHT;
