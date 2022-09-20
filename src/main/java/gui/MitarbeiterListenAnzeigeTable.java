@@ -4,14 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import mitarbeiter.Mitarbeiter;
 import verwaltung.MitarbeiterVerwaltung;
 
@@ -20,7 +18,9 @@ public class MitarbeiterListenAnzeigeTable {
 	private MitarbeiterVerwaltung mv;
 
 	private JFrame f = new JFrame("Personal- und Kostenliste");
-	JPanel center;
+	private JPanel center;
+	private JScrollPane scrollpane = new JScrollPane();
+
 
 	public MitarbeiterListenAnzeigeTable(MitarbeiterVerwaltung mv) {
 		this.mv = mv;
@@ -28,7 +28,7 @@ public class MitarbeiterListenAnzeigeTable {
 	}
 
 	private void init() {
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		f.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
 		JLabel tit = new JLabel("Liste aller Mitarbeiter", JLabel.CENTER);
 		tit.setFont(new Font("Calibri", Font.BOLD, 24));
@@ -37,22 +37,29 @@ public class MitarbeiterListenAnzeigeTable {
 
 		JButton refresh = new JButton("Neu Laden");
 		refresh.addActionListener(e -> {
-			center.removeAll();
-			center =this.fillTableOutput();
-			center.revalidate();
+//			center.removeAll();
+			scrollpane.removeAll();
+			scrollpane = this.fillTableOutput();
+//			center =this.fillTableOutput();
+//			center.revalidate();
+//			scrollpane.add(center);
+			scrollpane.revalidate();
+			f.add(scrollpane);
 		});
 		JPanel west = new JPanel();
 		west.add(refresh);
 		f.add(BorderLayout.WEST, west);
-		center = fillTableOutput();
-		f.add(center);
+//		center = fillTableOutput();
+//		scrollpane.removeAll();
+		scrollpane = fillTableOutput();
+		f.add(scrollpane);
 		f.validate();
-		f.setSize(800,800);
+		f.setSize(1000,1000);
 		f.setVisible(true);
 	}
 
-	private JPanel fillTableOutput() {
-		JPanel panel = new JPanel();
+	private JScrollPane fillTableOutput() {
+		JScrollPane panel = new JScrollPane();
 		GridLayout gl = new GridLayout(this.mv.getAlleMitarbeiter().size() + 2, 3);
 		panel.setLayout(gl);
 

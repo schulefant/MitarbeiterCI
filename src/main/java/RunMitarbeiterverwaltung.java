@@ -10,8 +10,8 @@ public class RunMitarbeiterverwaltung {
 		mv.loadMitarbeiter();
 		MitarbeiterAnlageGUI gui = new MitarbeiterAnlageGUI(mv);
 		MitarbeiterListenAnzeigeTextArea la = new MitarbeiterListenAnzeigeTextArea(mv);
-		//Die Anzeige als Tabelle aktualisiert sich nicht :-(
-		MitarbeiterListenAnzeigeTable lat = new MitarbeiterListenAnzeigeTable(mv); 
+		//Die Anzeige als Tabelle aktualisiert sich nicht richtig:-(
+//		MitarbeiterListenAnzeigeTable lat = new MitarbeiterListenAnzeigeTable(mv); 
 	}
 
 }
