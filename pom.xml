@@ -5,10 +5,10 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding><!-- Auf diese properties wird unten mit ${} zugegriffen -->
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
-		<junit.jupiter.version>5.8.1</junit.jupiter.version>
+		<junit.jupiter.version>5.8.1</junit.jupiter.version> 
 		<junit.platform.version>1.8.1</junit.platform.version>
 	</properties>
 	<dependencies>
@@ -22,7 +22,7 @@
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-api</artifactId>
 			<version>${junit.jupiter.version}</version>
-			<scope>test</scope>
+			<scope>test</scope><!-- wird nur bei mvn test durchgeführt, aber nicht bei mvn compile -->
 		</dependency>
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
