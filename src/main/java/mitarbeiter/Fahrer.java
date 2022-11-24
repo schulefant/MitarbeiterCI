@@ -24,6 +24,7 @@ public class Fahrer extends SchichtArbeiter {
 		super(id, name, satz);
 		this.setFuehrerSchein(fuehrerSchein);
 	}
+	@Override
 	public String toString() {
 		return super.toString() + " hat Fuehrerscheinklasse " + this.fuehrerSchein;
 	}
@@ -32,7 +33,7 @@ public class Fahrer extends SchichtArbeiter {
 //		try (BufferedWriter bw = Files.newBufferedWriter(file, StandardOpenOption.APPEND )) {
 //			bw.write(this.fuehrerSchein +"; ");
 //		} catch (IOException e) {
-//			// TODO Auto-generated catch block
+
 //			e.printStackTrace();
 //		}
 //	}

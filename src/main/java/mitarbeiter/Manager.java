@@ -27,6 +27,7 @@ public class Manager extends BueroArbeiter {
 			this.bonusSatz = 0;
 	}
 
+	@Override
 	protected void setID(int id) {
 		super.setID(Math.abs(id) % 100 + 5000);
 	}
@@ -35,6 +36,7 @@ public class Manager extends BueroArbeiter {
 		return getFestgehalt() * bonusSatz;
 	}
 
+	@Override
 	public double einkommen() {
 		return getFestgehalt() + berechneBonus();
 	}
@@ -47,7 +49,6 @@ public class Manager extends BueroArbeiter {
 //		try (BufferedWriter bw = Files.newBufferedWriter(file, StandardOpenOption.APPEND )) {
 //			bw.write(this.bonusSatz +"; ");
 //		} catch (IOException e) {
-//			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
 //	}

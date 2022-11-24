@@ -1,20 +1,10 @@
 package mitarbeiter;
 
 import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import mitarbeiter.Mitarbeiter;
-import mitarbeiter.MitarbeiterTyp;
 
 class TestMitarbeiter {
 	Mitarbeiter m;
-
-	@AfterEach
-	void tearDown() throws Exception {
-	}
 
 	@Test
 	void ifValidIDandNameIsPassedToConstructorValuesAreStoredInObject() {
@@ -37,7 +27,7 @@ class TestMitarbeiter {
 	}
 	@Test 
 	void ifTooSamllIDIsPassedToConstructorIllegalArgumentExceptionIsThrown() {
-		IllegalArgumentException e = assertThrows(IllegalArgumentException.class,()-> new Mitarbeiter(0,"Jo"){
+		assertThrows(IllegalArgumentException.class,()-> new Mitarbeiter(0,"Jo"){
 			@Override
 			protected MitarbeiterTyp getType() {
 				// TODO Auto-generated method stub
@@ -55,7 +45,7 @@ class TestMitarbeiter {
 	}
 	@Test 
 	void ifnegativeIDIsPassedToConstructorIllegalArgumentExceptionIsThrown() {
-		IllegalArgumentException e = assertThrows(IllegalArgumentException.class,()-> new Mitarbeiter(-1,"Jane"){
+		assertThrows(IllegalArgumentException.class,()-> new Mitarbeiter(-1,"Jane"){
 			@Override
 			protected MitarbeiterTyp getType() {
 				// TODO Auto-generated method stub
