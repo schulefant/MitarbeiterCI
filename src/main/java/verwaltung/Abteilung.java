@@ -13,7 +13,7 @@ public class Abteilung {
 	public Abteilung(String name, Manager leiter) {
 		super();
 		this.setName(name);
-		this.changeLeiter(leiter); //Der Rückgabewert muss hier nicht verwendet werden, weil leiter noch nie gesetzt wurde
+		this.changeLeiter(leiter); //Der Rueckgabewert muss hier nicht verwendet werden, weil leiter noch nie gesetzt wurde
 	}
 
 	public void add(Mitarbeiter neuer) {

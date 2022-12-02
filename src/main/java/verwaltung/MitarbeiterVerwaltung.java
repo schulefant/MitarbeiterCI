@@ -71,8 +71,8 @@ public class MitarbeiterVerwaltung {
 		attributeValues.add(1, "" + (++idCounter));
 		Mitarbeiter m = this.createMitarbeiter(attributeValues
 				.toArray(new String[0])); /*
-											 * Der Typ des Arrays wird mit new String[0] mitgeteilt. Verständlicher,
-											 * aber nicht notwendig, wäre: new String[attributeValues.size()]
+											 * Der Typ des Arrays wird mit new String[0] mitgeteilt. Verstuendlicher,
+											 * aber nicht notwendig, waere: new String[attributeValues.size()]
 											 */
 		try {
 			this.addToCSV(m);
