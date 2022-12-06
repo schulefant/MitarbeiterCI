@@ -1,6 +1,13 @@
 package mitarbeiter;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
+
 public class SchichtArbeiter extends Mitarbeiter {
+	private static final double MINDESTLOHN = 12.0;
 
 	private double stundenSatz;
 	private int anzahlStunden = 0;
@@ -10,7 +17,6 @@ public class SchichtArbeiter extends Mitarbeiter {
 		this.stundenSatz = original.getStundenSatz();
 		this.anzahlStunden = original.getAnzahlStunden();
 	}
-
 	public SchichtArbeiter(int id, String name, double stundenSatz) throws IllegalArgumentException {
 
 		/*
@@ -23,18 +29,16 @@ public class SchichtArbeiter extends Mitarbeiter {
 	public double getStundenSatz() {
 		return stundenSatz;
 	}
-
 	public void setStundenSatz(double stundenSatz) throws IllegalArgumentException {
-		if (stundenSatz >= 9.82)
+		if (stundenSatz >= MINDESTLOHN)
 			this.stundenSatz = stundenSatz;
 		else
-			throw new IllegalArgumentException("Stundensatz zu gering.");
+			throw new IllegalArgumentException("Stundensatz zu gering. " + MINDESTLOHN + " erforderlich.");
 	}
 
 	public int getAnzahlStunden() {
 		return anzahlStunden;
 	}
-
 	public void setAnzahlStunden(int anzahlStunden) {
 		if (anzahlStunden > 0)
 			this.anzahlStunden = anzahlStunden;
@@ -46,6 +50,7 @@ public class SchichtArbeiter extends Mitarbeiter {
 			this.setAnzahlStunden(this.anzahlStunden + std);
 	}
 
+	@Override
 	protected void setID(int id) {
 		super.setID(Math.abs(id) % 1000 + 3000);
 	}
@@ -54,21 +59,12 @@ public class SchichtArbeiter extends Mitarbeiter {
 		return anzahlStunden * stundenSatz;
 	}
 
+	@Override
 	public String toString() {
 		return super.toString()
 				+ (" Einkommen: " + einkommen() + " bei " + this.anzahlStunden + " gearbeiteten Stunden.");
 	}
 
-//	public void writeIntoCSV(Path file) {
-//		super.writeIntoCSV(file);
-//		try (BufferedWriter bw = Files.newBufferedWriter(file, StandardOpenOption.APPEND )) {
-//			bw.write(this.stundenSatz +"; ");
-//			bw.write(this.anzahlStunden +"; ");
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
 	@Override
 	public String toCSVString() {
 		String result = super.toCSVString();
@@ -76,7 +72,6 @@ public class SchichtArbeiter extends Mitarbeiter {
 		result += this.anzahlStunden + ";";
 		return result;
 	}
-
 	@Override
 	protected MitarbeiterTyp getType() {
 		return MitarbeiterTyp.SCHICHT;

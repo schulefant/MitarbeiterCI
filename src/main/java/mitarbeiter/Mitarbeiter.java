@@ -1,13 +1,15 @@
 package mitarbeiter;
 
-public abstract class Mitarbeiter {
+import verwaltung.Abteilungsteil;
+
+public abstract class Mitarbeiter implements Abteilungsteil {
 
 	private int id;
 	private String name;
 
 	public abstract double einkommen();
 
-	public Mitarbeiter(int id, String name) throws IllegalArgumentException {
+	protected Mitarbeiter(int id, String name) throws IllegalArgumentException {
 		this.setID(id);
 		this.setName(name);
 	}
@@ -15,7 +17,7 @@ public abstract class Mitarbeiter {
 	/**
 	 * Kopierkonstruktor erstellt einen Klon
 	 */
-	public Mitarbeiter(Mitarbeiter original) {
+	protected Mitarbeiter(Mitarbeiter original) {
 		this.name = original.getName();
 		this.id = original.getID();
 	}
@@ -32,7 +34,7 @@ public abstract class Mitarbeiter {
 		return this.id;
 	}
 
-	public void setName(String name)throws IllegalArgumentException {
+	public void setName(String name) throws IllegalArgumentException {
 		String erlaubt = "";
 		boolean anfangName = true;
 
@@ -67,6 +69,7 @@ public abstract class Mitarbeiter {
 		return this.name;
 	}
 
+	@Override
 	public String toString() {
 		return ("\nID: " + id + " Name: " + name);
 	}
@@ -80,5 +83,14 @@ public abstract class Mitarbeiter {
 		result += this.name + ";";
 		return result;
 	}
-	public void arbeite(int std) {}
+
+	// default Implementation fuer Mitarbeiter mit fester Verguetung
+	public void arbeite(int std) {
+	}
+
+	@Override
+	public int anzahlMitarbeiterInUndUnter() {
+		return 1;
+	}
+
 }

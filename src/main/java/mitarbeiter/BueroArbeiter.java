@@ -17,37 +17,31 @@ public class BueroArbeiter extends Mitarbeiter {
 	public double getFestgehalt() {
 		return festgehalt;
 	}
-
-	public double einkommen() {
-		return festgehalt;
-	}
-
 	public void setFestgehalt(double festgehalt) throws IllegalArgumentException {
 		if (festgehalt >= 300) // Mindestlohn 300 Euro
 			this.festgehalt = festgehalt;
 		else
 			throw new IllegalArgumentException("Gehalt ist zu gering.");
 	}
+
+	@Override
+	public double einkommen() {
+		return festgehalt;
+	}
 	@Override
 	protected void setID(int id) {
 		super.setID(Math.abs(id) % 1000 + 5000);
 	}
+
 	@Override
 	public String toString() {
 		return super.toString() + " hat Festgehalt: " + this.festgehalt;
 	}
-//	public void writeIntoCSV(Path file) {
-//		super.writeIntoCSV(file);
-//		try (BufferedWriter bw = Files.newBufferedWriter(file, StandardOpenOption.APPEND )) {
-//			bw.write(this.festgehalt +"; ");
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//	}
+
 	@Override
 	public String toCSVString() {
-		String result =	super.toCSVString();
-		result += this.festgehalt +";";
+		String result = super.toCSVString();
+		result += this.festgehalt + ";";
 		return result;
 	}
 

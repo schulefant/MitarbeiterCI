@@ -9,8 +9,10 @@ public class RunMitarbeiterverwaltung {
 		MitarbeiterVerwaltung mv = new MitarbeiterVerwaltung();
 		mv.loadMitarbeiter();
 		System.out.println("Mitarbeiter yeah");
-		MitarbeiterAnlageGUI gui = new MitarbeiterAnlageGUI(mv);
-		MitarbeiterListenAnzeigeTextArea la = new MitarbeiterListenAnzeigeTextArea(mv);
+//		MitarbeiterAnlageGUI gui = new MitarbeiterAnlageGUI(mv);
+//		MitarbeiterListenAnzeigeTextArea la = new MitarbeiterListenAnzeigeTextArea(mv);
+		System.out.println();
+		
 		//Die Anzeige als Tabelle aktualisiert sich nicht richtig:-(
 //		MitarbeiterListenAnzeigeTable lat = new MitarbeiterListenAnzeigeTable(mv); 
 	}

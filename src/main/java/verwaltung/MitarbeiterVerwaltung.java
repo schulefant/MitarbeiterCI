@@ -19,37 +19,45 @@ public class MitarbeiterVerwaltung {
 		return idCounter;
 	}
 
-	private Path fileToSave = Paths.get("mitarbeiter.csv");
+	private Path fileToSaveMitarbeiter = Paths.get("mitarbeiter.csv");
+	private Path fileToSaveAbteilungen = Paths.get("abteilungen.csv");
 	private ArrayList<Mitarbeiter> alleMitarbeiter = new ArrayList<>();
 	private ArrayList<SchichtArbeiter> malocher = new ArrayList<>();
 	private ArrayList<Fahrer> fahrer = new ArrayList<>();
 	private ArrayList<BueroArbeiter> buerohengste = new ArrayList<>();
 	private ArrayList<Manager> chefs = new ArrayList<>();
+	private ArrayList<Abteilung> abteilungen = new ArrayList<>();
 
 	public void saveAll() throws IOException {
 
-		try (BufferedWriter bw = Files.newBufferedWriter(fileToSave, StandardOpenOption.CREATE)) {
+		try (BufferedWriter bw = Files.newBufferedWriter(fileToSaveMitarbeiter, StandardOpenOption.CREATE)) {
 			for (Mitarbeiter m : alleMitarbeiter) {
 				bw.write(m.toCSVString());
 				bw.write("\n");
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try (BufferedWriter bw = Files.newBufferedWriter(fileToSaveAbteilungen, StandardOpenOption.CREATE)) {
+			for (Abteilungsteil at : abteilungen) {
+				bw.write(at.toCSVString());
+				bw.write("\n");
+			}
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
 	public void addToCSV(Mitarbeiter m) throws IOException {
 
-		if (Files.notExists(fileToSave)) {
-			Files.createFile(fileToSave);
+		if (Files.notExists(fileToSaveMitarbeiter)) {
+			Files.createFile(fileToSaveMitarbeiter);
 		}
 
-		try (BufferedWriter bw = Files.newBufferedWriter(fileToSave, StandardOpenOption.APPEND)) {
+		try (BufferedWriter bw = Files.newBufferedWriter(fileToSaveMitarbeiter, StandardOpenOption.APPEND)) {
 			bw.write(m.toCSVString());
 			bw.write("\n");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -57,27 +65,25 @@ public class MitarbeiterVerwaltung {
 	public void loadMitarbeiter() {
 
 		try {
-			List<String> mitarbeiterRecords = Files.readAllLines(fileToSave);
+			List<String> mitarbeiterRecords = Files.readAllLines(fileToSaveMitarbeiter);
 			for (String s : mitarbeiterRecords) {
 				createMitarbeiter(s.split(";"));
 			}
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	}
 
-	public void addMitarbeiter(ArrayList<String> attributeValues) {
+	public void addMitarbeiter(List<String> attributeValues) {
 		attributeValues.add(1, "" + (++idCounter));
-		Mitarbeiter m = this.createMitarbeiter(attributeValues
-				.toArray(new String[0])); /*
-											 * Der Typ des Arrays wird mit new String[0] mitgeteilt. Verstuendlicher,
-											 * aber nicht notwendig, waere: new String[attributeValues.size()]
-											 */
+		/*
+		 * Der Typ des Arrays wird mit new String[0] mitgeteilt. Verstaendlicher, aber
+		 * nicht notwendig, waere: new String[attributeValues.size()]
+		 */
+		Mitarbeiter m = this.createMitarbeiter(attributeValues.toArray(new String[0]));
 		try {
 			this.addToCSV(m);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -103,7 +109,7 @@ public class MitarbeiterVerwaltung {
 				int std = Integer.parseInt(attributeValues[4]);
 				sa.setAnzahlStunden(std);
 			} else
-				sa.arbeite((int) Math.random() * 40); //hier als Platzhalter
+				sa.arbeite((int) Math.random() * 40); // hier als Platzhalter
 			m = sa;
 			malocher.add(sa);
 			break;
@@ -123,7 +129,7 @@ public class MitarbeiterVerwaltung {
 				f.setAnzahlStunden(std);
 			} else
 				f = new Fahrer(id, name, stundenlohn, attributeValues[4]);
-				
+
 			m = f;
 			fahrer.add(f);
 			break;
@@ -158,27 +164,26 @@ public class MitarbeiterVerwaltung {
 			System.out.println("Lohnsumme: " + personalkosten());
 			System.out.println("Durchschnittlicher Lohn: " + durchschnitt);
 		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-//	public static void testWithAbteilung() {
-//		Abteilung it = new Abteilung("IT-Abteilung", new Manager(444444, "Paula", 10000, 0.05));
-//		it.add(new Manager(333333, "Pia", 10000, 0.3));
-//		it.add(new BueroArbeiter(456789, "Horst", 1300));
-//		SchichtArbeiter mal = new SchichtArbeiter(121212, "Yan", 15);
-//		mal.arbeite(43 * 4);
-//		it.add(mal);
-//		Fahrer fred = new Fahrer(456, "Fred", 23.5, "C");
-//		fred.arbeite(60 * 4);
-//		it.add(fred);
-//
-//		System.out.println("Test gehaltsListe");
-//		System.out.println(it.gehaltsListe());
-//
-//	}
-//
+	public static void testWithAbteilung() {
+		Abteilung it = new Abteilung("IT-Abteilung", new Manager(444444, "Paula", 10000, 0.05));
+		it.add(new Manager(333333, "Pia", 10000, 0.3));
+		it.add(new BueroArbeiter(456789, "Horst", 1300));
+		SchichtArbeiter mal = new SchichtArbeiter(121212, "Yan", 15);
+		mal.arbeite(43 * 4);
+		it.add(mal);
+		Fahrer fred = new Fahrer(456, "Fred", 23.5, "C");
+		fred.arbeite(60 * 4);
+		it.add(fred);
+
+		System.out.println("Test gehaltsListe");
+		System.out.println(it.gehaltsListe());
+
+	}
+
 	public final ArrayList<Mitarbeiter> getAlleMitarbeiter() {
 		return alleMitarbeiter;
 	}
